@@ -1,0 +1,98 @@
+## Introduction ##
+
+This program works as an interface between the web-client found att https://robotarm.parseapp.comand the AL5D Robotic arm from lynx motion http://www.lynxmotion.com. Commands are sent over hydna (https://hydna.com) from the web-client to this software which tells the robotarm to move.
+
+Install this software according to the installation instructions below then open up the web-client at https://robotarm.parseapp.com the web-client password if asked is: robotnic
+
+## Installation ##
+
+Note: this has been tested on macosx, please use a macosx for this guide.
+
+### Demo app instructions ###
+
+1. Clone this repo
+2. Ensure you have node.js installed on your system
+3. Move to your repo directory and in your terminal write:
+    
+    npm install
+
+4. Follow "General instructions" below step 1 and 2
+
+5. To start the program type:
+
+    node receiver.js
+
+6. Go to https://robotarm.parseapp.com and press "Control arm" password is: robotnic is everything has been done according to the instructions the arm should move inte "action" position and be ready to be controlled in the web-interface.
+
+7. Remember to turn off the arm after max 30 min use. Let it rest for a minute or two before turning it on again.
+
+### General instructions ###
+
+1. Install the correct drivers for your system to enable usbserial communication with the ssc32u http://www.ftdichip.com/Drivers/VCP.htm
+
+2. When the drivers are installed, connect your robotarm by usb, turn on the power and in your terminal issue the following command:
+
+    ls /dev/cu.*
+
+You will now get a list with the connected usb devices, if the ssc32u was detected and drivers properly installed we should see 
+
+    /dev/cu.usbserial-A1028AKN
+
+Remember/copy the device name, we are going to use it in our script later on. If you cannot se the device you might need to restart your computer, this happens sometimes when connecting and disconnecting the usb cable. The solution is often to restart your computer and always have the power cable connected if using a laptop.
+
+3. We are going to use the node library serialport to interface with our robot arm:
+
+Install node.js if you haven't and then install serialport:
+
+    npm install serialport -g
+
+4. Now create a file called connect.js with following code in it:
+
+    var SerialPort = require("serialport").SerialPort;
+    var serialport = require("serialport");
+
+    var BAUDRATE = 9600;
+    var DEVICE_FILE = '/dev/cu.usbserial-AI028AKN';
+
+    var ssc32u = new SerialPort(DEVICE_FILE, {
+        baudrate: BAUDRATE,
+        parser: serialport.parsers.readline("\r")
+     });
+
+    ssc32u.on('open', function() {
+        console.log('ss32u connected');
+        ssc32u.on('data', function(data) {
+            console.log('data received: ' + data);
+        });
+        ssc32u.write('ver\r', function(err, results) {
+            if (err) {
+                console.log('err ' + err);
+            } else {
+                console.log('results ' + results);
+            }
+        });
+    });
+
+As you can see we are using the device name we found earlier as DEVICE_FILE, if the name you got from step 2 is different use this as DEVICE_FILE instead.
+
+5. Now save the file and in your terminal run the following command:
+
+    node connect.js
+
+The script will now connect to your ssc32u and send a command and receive a response with it's version name. If you see no error you are now able to send commands to the robotarm.
+
+## important ##
+
+the P value for each servo roughly equals 1000 > 2000 so a middle values
+1000 + 1000 * perc/100;
+
+## fixes ##
+
+Motor moves to end without stopping, should not happen
+* always report state on interval? Backup
+* if closed simply stop, or go to reset position
+* new rest and reset position
+* slower speed? *
+* easier to control with mouse *
+* reset from other controller/small control panel
+* instructions when controlling and not controlling!

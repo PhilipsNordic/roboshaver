@@ -1,0 +1,10 @@
+{
+  "name": "controller",
+  "description": "Control robotarm over hydna",
+  "author": "Isak Wistrom <isak.wistrom@gmail.com>",
+  "dependencies": {
+    "hydna": "2.0.3",
+    "serialport": "1.5.x"
+  },
+  "engine": "node >= 10.0.1"
+}
