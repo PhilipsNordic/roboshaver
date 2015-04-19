@@ -12,11 +12,15 @@ This application enables over-the-internet control of a lynxmotion robotic arm i
 3. Copy the contents of **behavior.be** and paste it into your hydna domains behavior box found in your domains control panel. Now change the **VIEW_PASSWORD** and **CONTROL_PASSWORD** to your choosen passwords. Save changes by pressing Save and deploy.
 5. Ensure you have **node.js** installed on your system
 6. Navigate to your repository directory and in your terminal write:
-    
+
+Install required packages:
+
     npm install
 
 7. Install the correct drivers for your system to enable usb-serial communication with the ssc32u [http://www.ftdichip.com/Drivers/VCP.htm](http://www.ftdichip.com/Drivers/VCP.htm)
 8. When the drivers are installed, connect your robotarm by usb, turn on the power and in your terminal issue the following command:
+
+List connected usb devices:
 
     ls /dev/cu.*
 
@@ -25,6 +29,8 @@ You will now get a list with the connected usb devices, if the **ssc32u** was de
     /dev/cu.usbserial-A1028AKN
 
 9. To start the program type:
+
+Start receiver:
 
     node receiver.js
 
