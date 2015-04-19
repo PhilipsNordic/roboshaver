@@ -33,9 +33,9 @@ You will now get a list with the connected usb devices, if the **ssc32u** was de
     node receiver.js
     ```
 9. Upload the contents of the **public** folder to your hosting of choice or run the web application locally by running a local server on your machine.
-```
 installing local server:
 
+    ```
     npm install http-server -g
     ```
 example of running locally:
