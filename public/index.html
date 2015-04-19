@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="UTF-8">
+    <title>Philips RoboShave 1.0</title>
+
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/hydna/1.0.0/hydna.js"></script>
+    <link href='//fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
+    <link href="style/master.css?v=3" media="all" rel="stylesheet" />
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="script/adapter.js"></script>
+    <script type="text/javascript" src="script/screenfull.js"></script>
+    <script src="script/app.js"></script>
+   </head>
+   <body class="noselect">
+        <div class="videos">
+            <video id="localVideo" width="640" height="480" autoplay="autoplay" muted="muted"></video>
+            <div class="remoteVideoContainer">
+                <video id="remoteVideo" height="640" height="480" autoplay="autoplay"></video>
+            </div>
+            <div class="status">Pick your camera and audio source in the top right and press '<strong>Use selected</strong>'</div>
+        </div>
+
+        <div class="options">
+            <select id="videoSource"></select>
+            <select id="audioSource"></select>
+            <button id="start">Use selected</button>
+        </div>
+        <div class="mouse-controller">
+            <span class="radius"></span>
+            <span class="center"></span>
+        </div>
+        
+
+        <div class="instructions">
+            <div class="title">
+                <h3>Philips RoboShave 1.0</h3>
+                <div class="message">Not connected to arm!</div>
+            </div>
+
+            <h3>Instructions</h3>
+            <p>1. Press 'Control arm'.</p>
+            <p>2. Enter your password.</p>
+            <p>3. Use key controls and mouse:</p>
+            <p>
+            <ul>
+                <li><strong>up</strong> = arm forward</li>
+                <li><strong>down</strong> = arm backwards</li>
+                <li><strong>left</strong> = rotate arm left</li>
+                <li><strong>right</strong> = rotate arm right</li>
+                <li><strong>w</strong> = wrist up</li>
+                <li><strong>s</strong> = wrist down</li>
+            </ul>
+
+            <h3>Mouse controls:</h3>
+            <p>Drag the white dot and move your mouse up, down and left and right. Release or bring back to center to stop moving.</p>
+
+            <ul>
+                <li><strong>mouse left</strong> = rotate arm left</li>
+                <li><strong>mouse right</strong> = rotate arm right</li>
+                <li><strong>mouse up</strong> = arm forwards</li>
+                <li><strong>mouse down</strong> = arm backwards</li>
+
+                <br>
+               
+                <li><strong>shift + mouse left</strong> = rotate wrist left</li>
+                <li><strong>shift + mouse right</strong> = rotate arm right</li>
+                <li><strong>shift + mouse up</strong> = arm up</li>
+                <li><strong>shift + mouse down</strong> = arm down</li>
+
+            </ul>
+
+        </div>
+       <div class="controls">
+            <div>
+                <button id="control-btn">Control arm</button>
+                <span> | </span>
+                <button id="reset-btn">Reset</button>
+                <button id="rest-btn">Rest</button>
+                <span> | </span>
+                <button id="move-btn">Move</button>
+                <span> | </span>
+                <button id="fullscreen-btn">Toggle fullscreen</button>
+                <span> | </span>
+
+                <select id="speed">
+                    <option value="1.0">Change speed</option>
+                    <option value="1.0">Normal</option>
+                    <option value="1.4">Fast</option>
+                    <option value="1.6">Really fast</option>
+                </select>
+            </div>
+
+            <div class="logo">
+                <img src="/images/logo.png">
+            </div>
+        </div>
+
+        <div class="loader" id="loader">
+            <img src="/images/loader.gif">
+            <span class="loadinginfo">Taking control of robot arm...</span>
+        </div>
+
+    </body>
+</html>

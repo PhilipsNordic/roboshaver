@@ -4,8 +4,10 @@ var hydna = require('hydna');
 
 var BAUDRATE = 9600;
 var DEVICE_FILE = '/dev/cu.usbserial-AI028AKN';
-var CONTROL_CHANNEL = 'robotarm.hydna.net/control';
-var LISTEN_CHANNEL = 'robotarm.hydna.net/listen';
+
+// enter your hydna domain below and control channel, like: yourhydnadomain.hydna.net/control
+var CONTROL_CHANNEL = '';
+
 var SPEED = 200;
 
 var ssc32u = new SerialPort(DEVICE_FILE, {
@@ -44,9 +46,7 @@ function applyPosition(joints, time, callback) {
         }
         command = command + 'T' + time + '\r';
         ssc32u.write(command);
-
         commandsCompleted = false;
-
         timeoutComplete(time, callback);
     }
 }
@@ -184,16 +184,15 @@ function update(index, state, speed) {
         stopJoint(index); // stop command to motor
 
     } else if (state == 1) {
-        //tell motor to go to max position at given speed
+        // tell motor to go to max position at given speed
         joint.target = joint.max;
         updateJoint(index);
         
     } else if (state == -1) {
-        //tell motor to go to min position at given speed
+        // tell motor to go to min position at given speed
         joint.target = joint.min;
         updateJoint(index);
     }
-    
 }
 
 function parseStateCommand(command) {
@@ -255,6 +254,11 @@ function processData(data) {
 }
 
 function connectController() {
+    if (CONTROL_CHANNEL.length === 0) {
+        console.log('please provide a valid CONTROL_CHANNEL');
+        return;
+    }
+
     listenChannel = hydna.createChannel(CONTROL_CHANNEL, 'r');
     listenChannel.on('connect', function() {
         console.log('control channel open');
