@@ -36,7 +36,7 @@ You will now get a list with the connected usb devices, if the **ssc32u** was de
 installing local server:
 
     ```
-    npm install http-server -g
+    npm install -g http-server
     ```
 example of running locally:
 
