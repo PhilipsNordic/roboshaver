@@ -1,12 +1,10 @@
 $(function() {
 
-// replace below your your hydna domain
+// replace below with your hydna domain
 var HYDNA_DOMAIN = '';
 var CONTROL_CHANNEL = HYDNA_DOMAIN + '/control';
 var DRAG_THRESHOLD_Y = 20;
 var DRAG_THRESHOLD_X = 30;
-
-//
 
 var speed = 1;
 var defaultMotorSpeed = 200;
@@ -18,18 +16,13 @@ var motorSpeeds = {
     hand: 200
 }
 
-// change speeds here
-
 var dragging = false;
 var xdiff = 0;
 var ydiff = 0;
 var mousecontroller;
 var center;
 var enabled = false;
-
 var speedMultiplier = 1.0;
-
-// 
 
 var localVideo;
 var remoteVideo;
@@ -47,8 +40,6 @@ var supportsMediaTrack = false;
 var audioSelect = $('#audioSource');
 var videoSelect = $('#videoSource');
 var startBtn = $('#start');
-
-//
 
 var keys = [
     {key: 'w', code:87, down: false},
